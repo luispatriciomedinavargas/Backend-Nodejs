@@ -7,8 +7,9 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
-        this.api = '/api'
+        this.api = '/api';
         this.userRouterPath = `${this.api}/user`;
+        this.authPath = `${this.api}/auth`;
 
         //Connectar a la base de datos
         this.connectDB();
@@ -26,9 +27,17 @@ class Server {
 
     routes() {
 
+        this.app.use(this.authPath, require("../routes/auth"));
         this.app.use(this.userRouterPath, require("../routes/user"));
     }
+
+    listen() {
+        this.app.listen(this.port, () => {
+            console.log('Servidor corriendo en puerto', this.port);
+        });
+    }
     middlewares() {
+
         //CORS
         this.app.use(cors());
 
@@ -38,10 +47,6 @@ class Server {
         //Directorio Publico
         this.app.use(express.static('public'));
     }
-    listen() {
-        this.app.listen(this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port);
-        });
-    }
+
 }
 module.exports = Server;

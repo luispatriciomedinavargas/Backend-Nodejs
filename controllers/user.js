@@ -1,6 +1,5 @@
 const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
-const { validationResult } = require('express-validator');
 const Usuario = require("../models/usuario");
 
 
@@ -15,6 +14,7 @@ const userGet = async (req = request, res = response) => {
         Usuario.find(query)
             .skip(Number(skip))
             .limit(Number(limit))
+
     ])
 
     res.json({
@@ -25,7 +25,7 @@ const userGet = async (req = request, res = response) => {
 
 const userPost = async (req, res = response) => {
 
-    const { nombre, correo, password, rol } = req.body
+    const { nombre, correo, password, rol } = req.body;
     const usuario = new Usuario({ nombre, correo, password, rol });
 
     //Verificar si el correo existe
@@ -77,13 +77,20 @@ const userDelete = async (req, res = response) => {
 
     const { id } = req.params;
     //Fisicamente lo borramos
-
     // const usuario = await Usuario.findByIdAndDelete(id);
+    const checkUsuario = await Usuario.findById(id);
 
+    // if (!checkUsuario.estado) {
+    //     res.status(200).json({
+    //         msg: 'already update that user'
+    //     });
+    // }
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
+    const newUsuario = await Usuario.findById(id);
 
-    res.json({
-        usuario
+    res.status(200).json({
+        OldUser: usuario,
+        newUser: newUsuario
     });
 }
 
