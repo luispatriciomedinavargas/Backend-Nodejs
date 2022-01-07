@@ -174,7 +174,7 @@ const mostrarImage = async (req = request, res = response) => {
                 msg: 'se me olvido validar eso'
             })
     }
-    return res.sendFile(modelo.secure_url)
+    return res.status(200).json(modelo.img)
 
 }
 
