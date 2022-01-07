@@ -174,18 +174,7 @@ const mostrarImage = async (req = request, res = response) => {
                 msg: 'se me olvido validar eso'
             })
     }
-
-
-    //Limpiar imagenes previas
-    if (modelo.img) {
-        //Borrar la imagen del servidor
-        const pathImagen = path.join(__dirname, '../uploads', coleccion, modelo.img);
-        if (fs.existsSync(pathImagen)) {
-            return res.sendFile(pathImagen);
-        }
-    }
-
-    return res.sendFile(NoImageFound)
+    return res.sendFile(modelo.secure_url)
 
 }
 
