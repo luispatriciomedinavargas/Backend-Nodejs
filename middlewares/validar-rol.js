@@ -4,14 +4,12 @@ const Usuario = require('../models/usuario');
 
 const checkRol = async (req = request, res = response, next) => {
 
-
     if (!req.usuario) {
         return res.status(500).json({
             msg: 'wants check the rol without token, check it please'
         })
     }
     const { rol, name } = req.usuario;
-    console.log(rol);
 
     if (rol !== 'ADMIN_ROLE') {
         return res.status(404).json({

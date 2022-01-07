@@ -20,14 +20,7 @@ const validarJWT = async (req = request, res = response, next) => {
 
         const userAuth = await Usuario.findById(uid);
 
-        if (!userAuth) {
 
-            return res.status(401).json(
-                {
-                    msg: 'that is User is deleted, please check it - User is deleted DB'
-                }
-            )
-        }
 
         //Verificar si el uid tiene estado true
         if (!userAuth.estado) {

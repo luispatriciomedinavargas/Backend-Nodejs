@@ -1,2 +1,5 @@
 node_mudles/
 .env
+
+uploads/productos/**.*
+uploads/usuarios/**.*
