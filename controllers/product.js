@@ -4,8 +4,6 @@ const { Product } = require('../models/index');
 
 
 const createProducto = async (req = request, res = response) => {
-    // const { usuario } = req;
-    // const { _id } = usuario;
     const { _id } = req.usuario;
     const { name, categoria } = req.body;
     const data = {

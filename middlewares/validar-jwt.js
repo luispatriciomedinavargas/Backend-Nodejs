@@ -20,8 +20,6 @@ const validarJWT = async (req = request, res = response, next) => {
 
         const userAuth = await Usuario.findById(uid);
 
-
-
         //Verificar si el uid tiene estado true
         if (!userAuth.estado) {
             return res.status(401).json(
@@ -44,5 +42,4 @@ const validarJWT = async (req = request, res = response, next) => {
 
 
 }
-
 module.exports = { validarJWT }
