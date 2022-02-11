@@ -1,0 +1,754 @@
+{
+	"info": {
+		"_postman_id": "02e7cba4-fefb-468a-b302-6f7528fc0918",
+		"name": "Learn NodeJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"test 16\",\r\n    \"correo\":\"test16@test.com\",\r\n    \"password\":\"123456\",\r\n    \"rol\":\"USER_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User - Paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user?limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk0MzY0NDAsImV4cCI6MTYzOTQ1MDg0MH0.zBRGSYF9kPDX3p7DBXgfeNhlM9zAjnHRWPJKeDPxY7A",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/6199d9a954d5dfaf39758ac0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"6199d9a954d5dfaf39758ac0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "abc123",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\":\"test1@test.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"test 13\",\r\n    \"google\":true,\r\n    \"correo\":\"test13@test.com\",\r\n    \"password\":\"123456\", \r\n    \"rol\":\"USER_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/6199d9ea54d5dfaf39758aec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"6199d9ea54d5dfaf39758aec"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get all categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"galletas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Categoria by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk2NjgxNTgsImV4cCI6MTYzOTY4MjU1OH0.4y10q_-ouGheQ1TKBUoNaz75Vcql7RdHYEmyJnXDRX8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/61b7e98d90fdd7d94396321123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"61b7e98d90fdd7d94396321123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk1OTcxNDMsImV4cCI6MTYzOTYxMTU0M30.WuiwUic0ROyr9YbCz5XMCkLQFQ1nwuhEmDHhh-fX34I",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"qweqq\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Categoria",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk1MTgxMTEsImV4cCI6MTYzOTUzMjUxMX0.nkeMITj58GHUxmgbqHEmnC-RQU5cvP4VK_5XChxO7MA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"galleticas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/61b7e98d90fdd7d943963211",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"61b7e98d90fdd7d943963211"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk1MTgxMTEsImV4cCI6MTYzOTUzMjUxMX0.nkeMITj58GHUxmgbqHEmnC-RQU5cvP4VK_5XChxO7MA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"state\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categories/61b7e98d90fdd7d943963211",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categories",
+								"61b7e98d90fdd7d943963211"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "abc123",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\":\"test1@test.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Get all product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2NDAwMDA1ODYsImV4cCI6MTY0MDAxNDk4Nn0.EQ6LKDQLBaXWlazr-RfmbCGzJYkcW4nXzrJMj5aYphU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/product/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get producto by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk3NTAwMDIsImV4cCI6MTYzOTc2NDQwMn0.XrBc6MPIrWOS3Upke29VHwYPaHrft1emUAMWW_wC_PA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/product/61bb5d31d15f1570fb3d40cb",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"61bb5d31d15f1570fb3d40cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Producto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk2NjIyMTEsImV4cCI6MTYzOTY3NjYxMX0._2wAL4GzukfXi6rI_WK77NPdXoORFqXecj3eWRbNHNc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"a\",\r\n    \"price\":15,\r\n    \"description\":\"Las mejores galletas\",\r\n    \"categoria\":\"61b91473fc56de50eef30164\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/product/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk3NTAwMDIsImV4cCI6MTYzOTc2NDQwMn0.XrBc6MPIrWOS3Upke29VHwYPaHrft1emUAMWW_wC_PA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"galleticas\",\r\n    \"price\":15,\r\n    \"categoria\":\"61b918a9404cb7949ddc1d07\",\r\n    \"descripcion\":\"Preguntar al respositor\",\r\n    \"disponible\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/product/61bb4d9d449e6fb32327a807",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"61bb4d9d449e6fb32327a807"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Producto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk3NTE0NDAsImV4cCI6MTYzOTc2NTg0MH0.2IXH5bSau8Nm4qPbXZc2nStom1inn2lhH3Xn1EjSyew",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/product/61bb4d9d449e6fb32327a807",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"product",
+								"61bb4d9d449e6fb32327a807"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "abc123",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\":\"test1@test.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk3NjU0MjgsImV4cCI6MTYzOTc3OTgyOH0.Q0X_9bdGShE5dkhDf-7_5JDKN7ABfzuwasYbER2diBI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/search/products/pa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"search",
+								"products",
+								"pa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Get all product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTk5ZDlhMTU0ZDVkZmFmMzk3NThhYmMiLCJpYXQiOjE2Mzk3NjU0MjgsImV4cCI6MTYzOTc3OTgyOH0.Q0X_9bdGShE5dkhDf-7_5JDKN7ABfzuwasYbER2diBI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/search/products/61bb5d31d15f1570fb3d40cb",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"search",
+								"products",
+								"61bb5d31d15f1570fb3d40cb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/sasuk/Pictures/12345.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/uploads/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"uploads",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cargar imagen de usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/sasuk/Pictures/140327354_2842645162669956_3484718584583386731_n.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/uploads/productos/61bb4d9d449e6fb32327a807",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"uploads",
+								"productos",
+								"61bb4d9d449e6fb32327a807"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cargar imagen de producto",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/uploads/productos/61bb4d9d449e6fb32327a807",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"uploads",
+								"productos",
+								"61bb4d9d449e6fb32327a807"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
