@@ -12,8 +12,6 @@ const { Usuario, Product } = require('../models')
 const cargarArchivo = async (req = request, res = response) => {
 
     const file = req.files
-
-
     try {
         // const nombre = await subirArchivo(file, ['txt', 'md'], 'textos');
         const nombre = await subirArchivo(file, undefined, 'imgs');
@@ -55,7 +53,6 @@ const actualizarImagen = async (req = request, res = response) => {
                     msg: `No existe un producto con el id ${id}`
                 });
             }
-
             break;
 
         default:
@@ -63,8 +60,6 @@ const actualizarImagen = async (req = request, res = response) => {
                 msg: 'se me olvido validar eso'
             })
     }
-
-
     //Limpiar imagenes previas
     if (modelo.img) {
         //Borrar la imagen del servidor
@@ -86,8 +81,6 @@ const actualizarImagen = async (req = request, res = response) => {
 }
 
 const actualizarImagenCloudinary = async (req = request, res = response) => {
-
-
     const { coleccion, id } = req.params;
     let modelo;
 
@@ -117,7 +110,6 @@ const actualizarImagenCloudinary = async (req = request, res = response) => {
                 msg: 'se me olvido validar eso'
             })
     }
-
 
     //Limpiar imagenes previas
     if (modelo.img) {

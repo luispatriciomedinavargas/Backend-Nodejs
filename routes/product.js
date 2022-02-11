@@ -4,7 +4,7 @@ const { getProducto,
     deleteProducto,
     getProductoById,
     createProducto,
-    putProducto } = require('../controllers/product');
+    putProducto, } = require('../controllers/product');
 const { validarCampos, validarJWT, hasRole } = require('../middlewares');
 const { existProductoByID } = require('../helpers/db-validators');
 const router = Router();

@@ -27,6 +27,10 @@ const ProductoSchema = Schema({
     description: {
         type: String,
     },
+    stock: {
+        type: Number,
+        default: 0,
+    },
     disponible: {
         type: Boolean,
         default: true

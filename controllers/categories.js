@@ -98,7 +98,7 @@ const deleteCategoria = async (req, res = response) => {
             msg: 'the state must be false'
         })
     }
-    const deleteCategorie = await Categoria.findByIdAndUpdate(id, { state });
+    await Categoria.findByIdAndUpdate(id, { state });
     const showdeleteCategorie = await Categoria.findById(id);
 
     res.json({

@@ -51,7 +51,6 @@ const userPut = async (req = req, res = response) => {
 
     const { id } = req.params;
     const { password, google, correo, ...rest } = req.body;
-    //TODO validar ocntra BD
     if (password) {
         const salt = bcryptjs.genSaltSync();
         rest.password = bcryptjs.hashSync(password, salt);
@@ -76,15 +75,7 @@ const userPatch = (req = req, res = response) => {
 const userDelete = async (req, res = response) => {
 
     const { id } = req.params;
-    //Fisicamente lo borramos
-    // const usuario = await Usuario.findByIdAndDelete(id);
-    const checkUsuario = await Usuario.findById(id);
-
-    // if (!checkUsuario.estado) {
-    //     res.status(200).json({
-    //         msg: 'already update that user'
-    //     });
-    // }
+    await Usuario.findById(id);
     const usuario = await Usuario.findByIdAndUpdate(id, { estado: false });
     const newUsuario = await Usuario.findById(id);
 
