@@ -1,7 +1,7 @@
-const { Categoria, Usuario, Role, Product } = require('../models');
+const { Categoria, Usuario, Rol, Product } = require('../models');
 
 const esRolValido = async (rol = '') => {
-    const existeRol = await Role.findOne({ rol });
+    const existeRol = await Rol.findOne({ rol });
     if (!existeRol) {
         throw new Error(`El rol ${rol} no esta registrado en la BD `)
     }
@@ -61,9 +61,7 @@ const checkStock = (stock) => {
         })
     }
 };
-const checkAmount = (stockProducto, stock) => {
 
-}
 module.exports = {
     esRolValido,
     esEmailValido,
@@ -73,7 +71,6 @@ module.exports = {
     coleccionesPermitidas,
     checkPrice,
     checkStock,
-    checkAmount
 }
 
 
