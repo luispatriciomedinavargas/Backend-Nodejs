@@ -37,7 +37,7 @@ router.post('/', [
 //actualizar un registro por id/update a register by id - private
 router.put('/:id', [
     validarJWT,
-    // check('id', 'this ID is not valid').isMongoId(),
+    check('id', 'this ID is not valid').isMongoId(),
     check('id',).custom(existCategoriaID),
     check('name', 'the name must be required ').notEmpty(),
     validarCampos
@@ -45,13 +45,16 @@ router.put('/:id', [
 );
 
 //eliminar una categoria por id, estado=false/delete a category by id, estado=false - ONLY ADMIN
+
 router.delete('/:id', [
     validarJWT,
     check('id', 'this ID is not valid').isMongoId(),
-    check('state', 'the state is require - middleware').notEmpty(),
+    check('id').custom(existCategoriaID),
+    check('state', 'the state is require').notEmpty(),
     checkRol,
-    validarCampos,
-    hasRole
-], deleteCategoria);
+    hasRole('ADMIN_ROLE'),
+    validarCampos
+],
+    deleteCategoria)
 
 module.exports = router;

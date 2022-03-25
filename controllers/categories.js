@@ -1,13 +1,13 @@
 const { response } = require("express");
 const { Categoria } = require('../models');
 
+const query = ({ state: true });
 
 //getCategorias - paginado - total - populate relacion entre el ID y usuario,
 const getAllCategories = async (req, res = response) => {
     const { limit = 5, skip = 0 } = req.query;
 
 
-    const query = ({ state: true });
 
     const [all, categories] = await Promise.all([
         Categoria.countDocuments(query),
@@ -16,7 +16,7 @@ const getAllCategories = async (req, res = response) => {
             .limit(Number(limit))
             .populate('usuario', 'nombre')
     ])
-    res.json({
+    res.status(200).json({
         all,
         categories
     })
@@ -29,15 +29,12 @@ const getCategoriaById = async (req, res = response) => {
     const { id } = req.params;
 
 
-    if (!id) {
-        return res.json({
-            msg: 'please put a id'
-        })
-    }
-    const getCategoria = await Categoria.findById(id).populate('usuario', 'nombre');
 
-    return res.json({
-        categoria: getCategoria
+    const getCategoria = await Categoria.findById(id).populate('usuario', 'nombre').where(query);
+
+
+    return res.status(200).json({
+        getCategoria
     })
 
 
@@ -48,25 +45,24 @@ const getCategoriaById = async (req, res = response) => {
 const createCategorie = async (req, res = response) => {
 
     const name = req.body.name.toUpperCase();
-
     const categoriaDB = await Categoria.findOne({ name });
-
     if (categoriaDB) {
         return res.status(400).json({
             msg: `the categorie ${name} already exist.`
         });
     }
     //generar la data a guardar
+
     const data = {
         name,
         usuario: req.usuario._id
     }
-
     const categorie = await new Categoria(data);
-
     await categorie.save();
 
+
     res.status(201).json(categorie);
+
 }
 
 //updateCategorie
@@ -74,14 +70,13 @@ const createCategorie = async (req, res = response) => {
 const updateCategorie = async (req, res = response) => {
 
     const { id } = req.params
-    console.log(id);
     const { state, usuario, ...data } = req.body;
 
     data.name = data.name.toUpperCase();
     data.usuario = req.usuario._id;
     const updateCategorie = await Categoria.findByIdAndUpdate(id, data, { new: true });
 
-    res.json({
+    res.status(200).json({
         updateCategorie
     })
 
@@ -99,11 +94,15 @@ const deleteCategoria = async (req, res = response) => {
         })
     }
     await Categoria.findByIdAndUpdate(id, { state });
+
+
     const showdeleteCategorie = await Categoria.findById(id);
 
-    res.json({
-        showdeleteCategorie
+    res.status(200).json({
+        msg: 'ok, it was deleted successfully',
+
     })
+
 }
 
 module.exports = {

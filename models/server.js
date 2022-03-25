@@ -5,7 +5,6 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 //swagger
 const swaggerUI = require('swagger-ui-express');
-const YAML = require('yamljs');
 const swaggerJsDoc = require('swagger-jsdoc')
 class Server {
 
@@ -27,8 +26,8 @@ class Server {
                 ]
             },
             apis: [
-                `${path.join(__dirname, '../routes/*.js')}`
-            ]
+                `${path.join(__dirname, '../swagger/*.js')}`
+            ],
         }
         this.paths = {
             auth: `/api/auth`,
