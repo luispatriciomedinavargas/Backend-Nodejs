@@ -9,8 +9,7 @@ const checkRol = async (req = request, res = response, next) => {
             msg: 'wants check the rol without token, check it please'
         })
     }
-    const { rol, name } = req.usuario;
-
+    const { rol, nombre } = req.usuario;
     if (rol !== 'ADMIN_ROLE') {
         return res.status(404).json({
             msg: `${name} does not have permissions to change`

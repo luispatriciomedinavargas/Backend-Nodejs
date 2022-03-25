@@ -1,5 +1,5 @@
 const { Categoria, Usuario, Rol, Product } = require('../models');
-
+const query = ({ state: true });
 const esRolValido = async (rol = '') => {
     const existeRol = await Rol.findOne({ rol });
     if (!existeRol) {
@@ -25,7 +25,7 @@ const existID = async (id) => {
 };
 
 const existCategoriaID = async (id) => {
-    const checkID = await Categoria.findById(id);
+    const checkID = await Categoria.findById(id).where(query);
     if (!checkID) {
         throw new Error
             (`El id: ${id} no existe y/o no se puede actualizar `);
