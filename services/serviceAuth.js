@@ -1,4 +1,4 @@
-const Usuario = require("../models/usuario");
+
 const { repositoryExistUser,
     repositoryValidPassword } = require("../repository/repositoryAuth");
 
