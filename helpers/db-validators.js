@@ -1,3 +1,4 @@
+
 const { Categoria, Usuario, Rol, Product } = require('../models');
 const query = ({ state: true });
 const esRolValido = async (rol = '') => {
@@ -29,6 +30,15 @@ const existCategoriaID = async (id) => {
     if (!checkID) {
         throw new Error
             (`El id: ${id} no existe y/o no se puede actualizar `);
+    }
+    return
+};
+const existCategoriaName = async (name) => {
+    const checkname = await Categoria.findOne({name}).where(query);
+    console.log(checkname)
+    if (checkname) {
+        throw new Error
+            (`the name is taked`);
     }
     return
 };
@@ -71,6 +81,7 @@ module.exports = {
     coleccionesPermitidas,
     checkPrice,
     checkStock,
+    existCategoriaName,
 }
 
 

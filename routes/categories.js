@@ -1,60 +1,28 @@
 const { Router } = require('express');
-const { check } = require('express-validator');
+const {  } = require('express-validator');
 const { createCategorie,
     getAllCategories,
     updateCategorie, deleteCategoria, getCategoriaById } = require('../controllers/categories');
 
-const { validarJWT, validarCampos, checkRol, hasRole } = require('../middlewares');
-const { existCategoriaID, } = require('../helpers/db-validators')
+const { categoriesGetById, categoriesPost, categoriesPut, categoriesDelete } = require('../middlewares/categoriesMiddleware');
 const router = Router();
 
 /*{{url}}/api/categories */
 
 //Obtener todas las categorias/Get all categories - public
-router.get('/',
-    getAllCategories
-);
+router.get('/', getAllCategories);
 
 //Obtener una categoria por id/Get a categories by id - public
-router.get('/:id',
-    [
-        check('id', 'is not ID').isMongoId(),
-        check('id').custom(existCategoriaID),
-        validarCampos
-    ],
-    getCategoriaById
-);
+router.get('/:id', categoriesGetById, getCategoriaById);
 
 //Create categoria/Create a categoria - private
-router.post('/', [
-    validarJWT,
-    check('name', 'The name is required').not().isEmpty(),
-    validarCampos
-], createCategorie
-
-);
+router.post('/', categoriesPost, createCategorie);
 
 //actualizar un registro por id/update a register by id - private
-router.put('/:id', [
-    validarJWT,
-    check('id', 'this ID is not valid').isMongoId(),
-    check('id',).custom(existCategoriaID),
-    check('name', 'the name must be required ').notEmpty(),
-    validarCampos
-], updateCategorie
-);
+router.put('/:id', categoriesPut, updateCategorie);
 
 //eliminar una categoria por id, estado=false/delete a category by id, estado=false - ONLY ADMIN
 
-router.delete('/:id', [
-    validarJWT,
-    check('id', 'this ID is not valid').isMongoId(),
-    check('id').custom(existCategoriaID),
-    check('state', 'the state is require').notEmpty(),
-    checkRol,
-    hasRole('ADMIN_ROLE'),
-    validarCampos
-],
-    deleteCategoria)
+router.delete('/:id', categoriesDelete, deleteCategoria)
 
 module.exports = router;
