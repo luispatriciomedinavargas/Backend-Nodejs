@@ -1,26 +1,19 @@
 const { response } = require("express");
 const { Categoria } = require('../models');
+const { serviceAllCategories, serviceCategorieById, serviceCreateCategorie, serviceUpdateCategorie, serviceDeleteCategorie } = require("../services/serviceCategorie");
 
-const query = ({ state: true });
+
 
 //getCategorias - paginado - total - populate relacion entre el ID y usuario,
 const getAllCategories = async (req, res = response) => {
     const { limit = 5, skip = 0 } = req.query;
 
+ const{all,categories}= await serviceAllCategories(limit,skip)
 
-
-    const [all, categories] = await Promise.all([
-        Categoria.countDocuments(query),
-        Categoria.find(query)
-            .skip(Number(skip))
-            .limit(Number(limit))
-            .populate('usuario', 'nombre')
-    ])
-    res.status(200).json({
-        all,
-        categories
-    })
-
+ return res.status(200).json({
+     all,
+     categories
+ })
 }
 
 
@@ -29,12 +22,10 @@ const getCategoriaById = async (req, res = response) => {
     const { id } = req.params;
 
 
-
-    const getCategoria = await Categoria.findById(id).populate('usuario', 'nombre').where(query);
-
+const categorieById=await serviceCategorieById(id);
 
     return res.status(200).json({
-        getCategoria
+        categorieById
     })
 
 
@@ -45,23 +36,18 @@ const getCategoriaById = async (req, res = response) => {
 const createCategorie = async (req, res = response) => {
 
     const name = req.body.name.toUpperCase();
-    const categoriaDB = await Categoria.findOne({ name });
-    if (categoriaDB) {
-        return res.status(400).json({
-            msg: `the categorie ${name} already exist.`
-        });
-    }
+  
     //generar la data a guardar
-
     const data = {
         name,
         usuario: req.usuario._id
     }
-    const categorie = await new Categoria(data);
-    await categorie.save();
+    const categorie = await serviceCreateCategorie(data)
 
 
-    res.status(201).json(categorie);
+   return res.status(201).json({
+        categorie
+    });
 
 }
 
@@ -74,10 +60,8 @@ const updateCategorie = async (req, res = response) => {
 
     data.name = data.name.toUpperCase();
     data.usuario = req.usuario._id;
-    const updateCategorie = await Categoria.findByIdAndUpdate(id, data, { new: true });
-
-    updateCategorie.save();
-    res.status(200).json({
+    const updateCategorie = await serviceUpdateCategorie(id,data);
+   return res.status(200).json({
         updateCategorie
     })
 
@@ -89,15 +73,9 @@ const deleteCategoria = async (req, res = response) => {
     const { id } = req.params;
     const { state } = req.body;
 
-    if (state) {
-        return res.json({
-            msg: 'the state must be false'
-        })
-    }
-    await Categoria.findByIdAndUpdate(id, { state });
 
 
-    const showdeleteCategorie = await Categoria.findById(id);
+    const deleteCategorie = await serviceDeleteCategorie(id,state)
 
     res.status(200).json({
         msg: 'ok, it was deleted successfully',
