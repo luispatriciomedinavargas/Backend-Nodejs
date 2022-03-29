@@ -76,6 +76,7 @@ const updateCategorie = async (req, res = response) => {
     data.usuario = req.usuario._id;
     const updateCategorie = await Categoria.findByIdAndUpdate(id, data, { new: true });
 
+    updateCategorie.save();
     res.status(200).json({
         updateCategorie
     })
