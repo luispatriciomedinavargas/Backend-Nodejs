@@ -60,6 +60,7 @@ const updateCategorie = async (req, res = response) => {
 
     data.name = data.name.toUpperCase();
     data.usuario = req.usuario._id;
+    
     const updateCategorie = await serviceUpdateCategorie(id,data);
    return res.status(200).json({
         updateCategorie
@@ -74,8 +75,7 @@ const deleteCategoria = async (req, res = response) => {
     const { state } = req.body;
 
 
-
-    const deleteCategorie = await serviceDeleteCategorie(id,state)
+ await serviceDeleteCategorie(id,state)
 
     res.status(200).json({
         msg: 'ok, it was deleted successfully',
