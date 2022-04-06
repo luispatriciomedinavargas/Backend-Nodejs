@@ -1,5 +1,4 @@
 const { response } = require("express");
-const { Categoria } = require('../models');
 const { serviceAllCategories, serviceCategorieById, serviceCreateCategorie, serviceUpdateCategorie, serviceDeleteCategorie } = require("../services/serviceCategorie");
 
 

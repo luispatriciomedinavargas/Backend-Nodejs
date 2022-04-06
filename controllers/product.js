@@ -27,7 +27,6 @@ const getProducto = async (req = request, res = response) => {
 
     const { limit, skip } = req.params;
 
-    const query = ({ state: true });
 
     const getAllProducto = await Product.find(query).skip(skip).limit(limit);
 
@@ -81,7 +80,6 @@ const deleteProducto = async (req = request, res = response) => {
 
     const { id } = req.params;
 
-    const query = { state: false };
 
     const deleteProd = await Product.findByIdAndUpdate(id, query, { new: true });
     res.json({
