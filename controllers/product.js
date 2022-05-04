@@ -1,7 +1,8 @@
 const { response, request } = require("express");
-const { checkStock, checkAmount } = require("../helpers");
+const { checkStock, checkAmount,query } = require("../helpers");
 const { Product } = require('../models/index');
 const SellProducto = require("../models/sellProducto");
+const { createProductoService } = require("../services/serviceProduct");
 
 
 
@@ -14,7 +15,7 @@ const createProducto = async (req = request, res = response) => {
         usuario: _id,
         stock
     }
-    const createProducto = await Product(data);
+    const createProducto = await createProductoService(data)
 
     await createProducto.save();
     res.status(201).json({
@@ -26,7 +27,6 @@ const createProducto = async (req = request, res = response) => {
 const getProducto = async (req = request, res = response) => {
 
     const { limit, skip } = req.params;
-
 
     const getAllProducto = await Product.find(query).skip(skip).limit(limit);
 
@@ -80,6 +80,7 @@ const deleteProducto = async (req = request, res = response) => {
 
     const { id } = req.params;
 
+    const query = { state: false };
 
     const deleteProd = await Product.findByIdAndUpdate(id, query, { new: true });
     res.json({

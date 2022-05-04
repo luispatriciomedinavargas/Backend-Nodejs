@@ -7,8 +7,9 @@ return createProducto;
 }
 query
 
-const getProductoRepository=async()=>{
-    const getAllProducto=await Product.find(query)
+const getAllProductoRepository=async(skip,limit)=>{
+    const getAllProducto=await Product.find(query).skip(skip)
+    .limit(limit)
     return getAllProducto;
 }
 
@@ -27,7 +28,7 @@ const deleteProductoRepository=async(id)=>{
 
 module.exports={
 createProductoRepository,
-getProductoRepository,
+getProductoRepository: getAllProductoRepository,
 getProductoByIdRepository,
 deleteProductoRepository
 }
